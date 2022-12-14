@@ -15,7 +15,7 @@ app.get('/',(req,res)=>{
     res.send("Server is running.");
 })
 
-io,on('connection',(socket)=>{
+io.on('connection',(socket)=>{
     socket.emit('me',socket.id);
 
     socket.on('dicconnect',()=>{
