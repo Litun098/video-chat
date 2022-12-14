@@ -15,7 +15,20 @@ app.get('/',(req,res)=>{
     res.send("Server is running.");
 })
 
+io,on('connection',(socket)=>{
+    socket.emit('me',socket.id);
 
+    socket.on('dicconnect',()=>{
+        socket.broadcast.emit("callended");
+    })
+
+    socket.on('calluser',({userToCall,signal,from,name})=>{
+        io.to(userToCall).emit('calluser',{signal:signalData,from,name});
+    })
+    socket.on('answerCall',(data)=>{
+        io.to(data.to).emit('callaccepted',data.signal);
+    })
+})
 server.listen(PORT,()=>{
     console.log("Server listening",PORT)
 });
