@@ -1,4 +1,4 @@
-# Video char application
+# Video chat application
 
 #### required dependencies
 
